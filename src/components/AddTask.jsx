@@ -5,8 +5,9 @@ function AddTask({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.trim()) {
-      onAdd(text.trim());
+    const v = text.trim();
+    if (v) {
+      onAdd(v);
       setText("");
     }
   };

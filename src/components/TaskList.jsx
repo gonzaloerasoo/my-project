@@ -1,5 +1,5 @@
 import React from "react";
-import TaskItem from "./TaskItem";
+import TaskItem from "./TaskItem.jsx";
 
 function TaskList({ tasks, onDelete, onToggle }) {
   return (
