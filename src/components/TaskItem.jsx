@@ -8,7 +8,12 @@ function TaskItem({ task, onDelete, onToggle }) {
           type="checkbox"
           checked={task.completed}
           disabled={!task.completed}
-          onChange={() => onToggle(task.id)}
+          onChange={() => {
+            if (task.completed) {
+              onToggle(task.id);
+            }
+          }}
+          style={{ cursor: task.completed ? "pointer" : "default" }}
         />
         <span>{task.text}</span>
       </div>
