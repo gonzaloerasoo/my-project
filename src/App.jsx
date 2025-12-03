@@ -31,18 +31,34 @@ function App() {
   };
 
   const toggleTask = (id) => {
-    setTasks(tasks.map((t) =>
-      t.id === id ? { ...t, completed: !t.completed } : t
-    ));
+    setTasks(
+      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+    );
   };
 
   const deleteAll = () => {
-    setTasks([]);
+    if (window.confirm("¿Seguro que quieres eliminar todas las tareas?")) {
+      setTasks([]);
+    }
   };
 
-  const filteredTasks = tasks.filter((t) =>
-    filter === "all" ? true : filter === "completed" ? t.completed : !t.completed
-  );
+  const toggleAll = () => {
+    const allCompleted = tasks.every((t) => t.completed);
+    setTasks(tasks.map((t) => ({ ...t, completed: !allCompleted })));
+  };
+
+  const filteredTasks = tasks
+    .filter((t) =>
+      filter === "all"
+        ? true
+        : filter === "completed"
+        ? t.completed
+        : !t.completed
+    )
+    .sort((a, b) => {
+      if (a.completed === b.completed) return 0;
+      return a.completed ? 1 : -1;
+    });
 
   return (
     <div className="app">
@@ -50,7 +66,14 @@ function App() {
       <AddTask onAdd={addTask} />
       {tasks.length > 0 && (
         <div className="actions">
-          <button className="delete-all" onClick={deleteAll}>Eliminar todas</button>
+          <button className="complete-all" onClick={toggleAll}>
+            {tasks.every((t) => t.completed)
+              ? "Todas pendientes"
+              : "Completar todas"}
+          </button>
+          <button className="delete-all" onClick={deleteAll}>
+            Eliminar todas
+          </button>
         </div>
       )}
       <div className="filters">
@@ -73,7 +96,11 @@ function App() {
           Pendientes
         </button>
       </div>
-      <TaskList tasks={filteredTasks} onDelete={deleteTask} onToggle={toggleTask} />
+      <TaskList
+        tasks={filteredTasks}
+        onDelete={deleteTask}
+        onToggle={toggleTask}
+      />
     </div>
   );
 }

@@ -50,17 +50,37 @@ button:hover {
   background-color: #00bcd4;
 }
 
+.complete-all,
 .delete-all {
-  width: 100%;
-  margin-bottom: 1rem;
+  flex: 1;
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.complete-all {
   background-color: transparent;
   border: 2px solid #00e5ff;
   color: #00e5ff;
 }
 
-.delete-all:hover {
+.complete-all:hover {
   background-color: #00e5ff;
   color: #121212;
+}
+
+.delete-all {
+  background-color: transparent;
+  border: 2px solid #e81123;
+  color: #e81123;
+}
+
+.delete-all:hover {
+  background-color: #e81123;
+  color: #fff;
 }
 
 ul {
@@ -78,7 +98,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: box-shadow 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.2s ease;
 }
 
 li:hover {
@@ -87,7 +107,13 @@ li:hover {
 
 li.completed span {
   text-decoration: line-through;
-  opacity: 0.5;
+  color: #00e5ff;
+  opacity: 1;
+}
+
+li.completed {
+  transform: translateY(8px);
+  opacity: 0.7;
 }
 
 li span {
@@ -95,11 +121,6 @@ li span {
   margin-left: 0.75rem;
   font-size: 1rem;
   color: #e0e0e0;
-}
-
-li input[type="checkbox"] {
-  transform: scale(1.2);
-  accent-color: #00e5ff;
 }
 
 .task-content {
@@ -112,37 +133,32 @@ li input[type="checkbox"] {
 .task-actions {
   display: flex;
   gap: 0.5rem;
+  justify-content: flex-end;
 }
 
 .task-actions button {
-  padding: 0.5rem 0.8rem;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  width: 160px;
-  text-align: center;
+  width: 54px;
+  height: 54px;
+  font-size: 1.8rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .task-actions button:first-child {
-  border: 2px solid #00e5ff;
-  background-color: transparent;
   color: #00e5ff;
 }
 
-.task-actions button:first-child:hover {
-  background-color: #00e5ff;
-  color: #121212;
-}
-
 .task-actions button:last-child {
-  border: 2px solid #e81123;
-  background-color: transparent;
   color: #e81123;
-  width: 160px;
 }
 
-.task-actions button:last-child:hover {
-  background-color: #e81123;
-  color: #fff;
+.task-actions button:hover {
+  background-color: rgba(0, 229, 255, 0.08);
 }
 
 .filters {
@@ -174,5 +190,7 @@ li input[type="checkbox"] {
 }
 
 .actions {
+  display: flex;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
