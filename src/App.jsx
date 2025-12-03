@@ -96,11 +96,15 @@ function App() {
           Pendientes
         </button>
       </div>
-      <TaskList
-        tasks={filteredTasks}
-        onDelete={deleteTask}
-        onToggle={toggleTask}
-      />
+      {filteredTasks.length === 0 ? (
+        <div className="no-tasks">Aún no hay tareas</div>
+      ) : (
+        <TaskList
+          tasks={filteredTasks}
+          onDelete={deleteTask}
+          onToggle={toggleTask}
+        />
+      )}
     </div>
   );
 }
